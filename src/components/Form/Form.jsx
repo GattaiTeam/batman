@@ -126,7 +126,7 @@ class Form extends React.Component {
     }
     
     save = () => {
-        console.log(this.state);
+        this.props.onSave && this.props.onSave(this.state);
     }
 
     render() {

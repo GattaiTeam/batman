@@ -1,37 +1,40 @@
 import React from 'react';
 import './App.css';
 import Form from './components/Form/Form';
+import jwt from 'jwt-simple';
 
 
 function App() {
   const fields = [
     {
-      label: "amount",
+      label: "Monto",
       key: 'amount',
     },
     {
-      label: "cellphone",
+      label: "Celular",
       key: 'cellphone',
+      type: 'tel',
     },
     {
-      label: "email",
+      label: "Email",
       key: 'email',
     },
     {
-      label: "first_name",
+      label: "Nombre (s)",
       key: 'first_name',
     },
     {
-      label: "last_name_1",
+      label: "Apellido Materno",
       key: 'last_name_1',
     },
     {
-      label: "last_name_2",
+      label: "Apellido Paterno",
       key: 'last_name_2',
     },
     {
       label: "birth_date",
       key: 'birth_date',
+      type: 'date',
     },
     {
       label: "sex",
@@ -61,7 +64,7 @@ function App() {
     },
     {
       label: "zipcode",
-      key: 'zipcode  ',
+      key: 'zipcode',
     },
 ];
 const initialState = {
@@ -81,9 +84,18 @@ const initialState = {
     zipcode: '',
 }
 
+const handleSave = data => {
+  const secret = "QueVivaElGalloDeOro";
+  console.log("data: ", data);
+  const encoded = jwt.encode(data, secret);
+  console.log("encoded", encoded);
+  console.log("decoded", jwt.decode(encoded, secret));
+}
+
   return (
     <div className="App">
       <Form
+        onSave={handleSave}
         initialState={initialState}
         fields={fields}
       />
