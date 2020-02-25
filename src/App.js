@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Form from './components/Form/Form';
 import jwt from 'jwt-simple';
+import {secret} from './utils';
 
 
 function App() {
@@ -85,7 +86,7 @@ const initialState = {
 }
 
 const handleSave = data => {
-  const secret = "QueVivaElGalloDeOro";
+  
   console.log("data: ", data);
   const encoded = jwt.encode(data, secret);
   console.log("encoded", encoded);
