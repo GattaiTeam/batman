@@ -73,8 +73,8 @@ app.get('/superman', (req,res) => {
     console.log('Sent a Superman');
 });
 
-//app.get('*', (req,res) =>{
-  //  res.sendFile('/home/rodolfoarv/Documents/Gattai/AskRobin/batman/public/index.html');
-//});
+app.get('/creditea', function (req, res) {
+    res.redirect(301, 'http://localhost:5000');
+});
 
 app.listen(4001)

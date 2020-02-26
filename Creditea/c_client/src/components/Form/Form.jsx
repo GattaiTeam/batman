@@ -2,6 +2,11 @@ import React from 'react';
 import Container from 'react-bulma-components/lib/components/container';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Button from 'react-bulma-components/lib/components/button';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import IframeComm from "react-iframe-comm";
+//import GattaiFrame from '../Iframe/Iframe';
+
+
 import {
     Field,
     Control,
@@ -12,13 +17,58 @@ import {
   } from 'react-bulma-components/lib/components/form';
   import {toast} from 'react-toastify';
 
+
+  const GattaiFrame = ({}) => {
+
+      // the html attributes to create the iframe with
+      // make sure you use camelCase attribute names
+      const attributes = {
+          src: 'http://localhost:4000',
+          width: "100%",
+          height: "175",
+          frameBorder: 1, // show frame border just for fun...
+      };
+
+      // the postMessage data you want to send to your iframe
+      // it will be send after the iframe has loaded
+      const postMessageData = "hello iframe";
+
+      // parent received a message from iframe
+      const onReceiveMessage = (event) => {
+          //console.log("onReceiveMessage")
+          //https://stackoverflow.com/questions/25098021/securityerror-blocked-a-frame-with-origin-from-accessing-a-cross-origin-frame
+          console.log(event)
+
+      };
+
+      // iframe has loaded
+      const onReady = () => {
+          console.log("onReady");
+      };
+
+      return (
+          <IframeComm
+              attributes={attributes}
+              postMessageData={postMessageData}
+              handleReady={onReady}
+              handleReceiveMessage={onReceiveMessage}
+          />
+      );
+  };
+
 class Form extends React.Component {
+
+
+
+
+
+
     state = {
         ...this.props.initialState,
     };
 
     dateToShow = new Date();
-   
+
 
     isLoading = false;
 
@@ -39,14 +89,14 @@ class Form extends React.Component {
                     <Select
                         name={field.key}
                         onChange={this.onChange}
-                        value={this.state[field.key]} 
+                        value={this.state[field.key]}
                     >
                         <option value=''>Select...</option>
                         {
                             field.options &&
                             this.renderSelectOptions(field.options)
                         }
-                    </Select>                                        
+                    </Select>
                 );
             case 'checkbox':
                 return (<Checkbox
@@ -56,15 +106,15 @@ class Form extends React.Component {
                     checked={this.state.active_flag}
                 >
                     {field.label}
-                </Checkbox>);           
+                </Checkbox>);
             default:
-                return (<Input 
+                return (<Input
                         {...field}
                         name={field.key}
                         onChange={this.onChange}
-                        value={this.state[field.key]} 
+                        value={this.state[field.key]}
                     />)
-        }        
+        }
     }
 
     renderFields = fields => {
@@ -78,7 +128,7 @@ class Form extends React.Component {
                     <Control>
                         {this.renderSingleField(field)}
                     </Control>
-                </Field>        
+                </Field>
             )
         });
     }
@@ -98,7 +148,7 @@ class Form extends React.Component {
                 if (typeof this.state[keys[i]] === "number" && this.state[keys[i]] === 0) {
                     break;
                 }
-                
+
                 isValid = false;
                 toast.warn('All fields are required');
                 break;
@@ -124,7 +174,7 @@ class Form extends React.Component {
 
         return isValid;
     }
-    
+
     save = () => {
         this.props.onSave && this.props.onSave(this.state);
     }
@@ -140,25 +190,34 @@ class Form extends React.Component {
                     <Columns>
                         <Columns.Column size='half' offset='one-quarter'>
                             <Columns>
+                                <Columns.Column style={{textAlign: 'center'}}>
+                                    <b> Creditea </b>
+                                </Columns.Column>
+
+                                <Columns.Column style={{textAlign: 'center'}}>
+                                    <GattaiFrame> </GattaiFrame>
+                                </Columns.Column>
+
+
                                 <Columns.Column size={12}>
                                     {this.renderFields(this.fields)}
                                 <Field>
                                 <Control>
 
                                 </Control>
-                                </Field>                                 
+                                </Field>
                                 </Columns.Column>
                                 <Columns.Column size='half'>
                                     <Button className='solid' onClick={this.save}>Save</Button>
-                                </Columns.Column> 
+                                </Columns.Column>
                                 <Columns.Column style={{textAlign: 'center'}}>
                                     {this.props.after}
-                                </Columns.Column>                        
-                            </Columns>         
+                                </Columns.Column>
+                            </Columns>
                         </Columns.Column>
                     </Columns>
                 </Container>
-            </div>    
+            </div>
         )
     }
 }

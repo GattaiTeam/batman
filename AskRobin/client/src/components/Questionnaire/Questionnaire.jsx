@@ -1,9 +1,12 @@
+
 import React, { useState } from 'react';
 import Form from '../Form';
 import jwt from 'jwt-simple';
 import { Redirect } from 'react-router-dom';
 import {secret} from '../../utils';
 import axios from 'axios';
+
+
 
 const Questionnaire = () => {
     const [redirect, setRedirect] = useState(false);
@@ -107,28 +110,23 @@ const Questionnaire = () => {
     }
 
     const handleSave = data => {
-
-
       console.log("data: ", data);
-      axios.post(`createToken`,
+      axios.post(`/createToken`,
             data
       ).then(res => {
         localStorage.setItem('GattaiToken', res.data['accessToken']);
         console.log(res.data)
       })
-
-      //const encoded = jwt.encode(data, secret);
-      //console.log("encoded", encoded);
-      //console.log("decoded", jwt.decode(encoded, secret));
-
       setRedirect(true);
     }
 
     const renderRedirect = () => {
         if (redirect) {
-          return <Redirect to='https://example.com/1234' />
+          window.location = 'http://localhost:5000/'
         }
     }
+
+
 
     return (
         <React.Fragment>

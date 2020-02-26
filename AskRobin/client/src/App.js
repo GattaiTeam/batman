@@ -13,7 +13,7 @@ function App() {
           <Route exact path='/' component={Questionnaire} />
           <Route exact path='/frame' component={Iframe} />
         </Switch>
-      </BrowserRouter>      
+      </BrowserRouter>
     </div>
 )
 }

@@ -19,7 +19,7 @@ class Form extends React.Component {
     };
 
     dateToShow = new Date();
-   
+
 
     isLoading = false;
 
@@ -40,14 +40,14 @@ class Form extends React.Component {
                     <Select
                         name={field.key}
                         onChange={this.onChange}
-                        value={this.state[field.key]} 
+                        value={this.state[field.key]}
                     >
                         <option value=''>Select...</option>
                         {
                             field.options &&
                             this.renderSelectOptions(field.options)
                         }
-                    </Select>                                        
+                    </Select>
                 );
             case 'checkbox':
                 return (<Checkbox
@@ -57,15 +57,15 @@ class Form extends React.Component {
                     checked={this.state.active_flag}
                 >
                     {field.label}
-                </Checkbox>);           
+                </Checkbox>);
             default:
-                return (<Input 
+                return (<Input
                         {...field}
                         name={field.key}
                         onChange={this.onChange}
-                        value={this.state[field.key]} 
+                        value={this.state[field.key]}
                     />)
-        }        
+        }
     }
 
     renderFields = fields => {
@@ -79,7 +79,7 @@ class Form extends React.Component {
                     <Control>
                         {this.renderSingleField(field)}
                     </Control>
-                </Field>        
+                </Field>
             )
         });
     }
@@ -91,6 +91,17 @@ class Form extends React.Component {
         });
     };
 
+    componentDidMount = () =>  {
+      if (window.localStorage['GattaiToken']){
+        const gattaiToken = window.localStorage['GattaiToken']
+        console.log(window.localStorage['GattaiToken'])
+        window.postMessage(window.localStorage['GattaiToken'], window.parent)
+
+
+
+      }
+    }
+
     validate = () => {
         const keys = Object.entries(this.props.initialState).map(e => e[0]);
         let isValid = true;
@@ -99,7 +110,7 @@ class Form extends React.Component {
                 if (typeof this.state[keys[i]] === "number" && this.state[keys[i]] === 0) {
                     break;
                 }
-                
+
                 isValid = false;
                 toast.warn('All fields are required');
                 break;
@@ -125,7 +136,7 @@ class Form extends React.Component {
 
         return isValid;
     }
-    
+
     save = () => {
         if (this.state.currentStep < 3) {
             this.setState({...this.state, currentStep: this.state.currentStep + 1})
@@ -151,19 +162,19 @@ class Form extends React.Component {
                                 <Control>
 
                                 </Control>
-                                </Field>                                 
+                                </Field>
                                 </Columns.Column>
                                 <Columns.Column size='half'>
                                     <Button className='solid' onClick={this.save}>{(this.state.currentStep < 3) ? 'Guardar' : 'Continuar'}</Button>
-                                </Columns.Column> 
+                                </Columns.Column>
                                 <Columns.Column style={{textAlign: 'center'}}>
                                     {this.props.after}
-                                </Columns.Column>                        
-                            </Columns>         
+                                </Columns.Column>
+                            </Columns>
                         </Columns.Column>
                     </Columns>
                 </Container>
-            </div>    
+            </div>
         )
     }
 }
