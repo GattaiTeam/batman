@@ -126,7 +126,7 @@ const Questionnaire = () => {
 
     const renderRedirect = () => {
         if (redirect) {
-          return <Redirect to='/frame' />
+          return <Redirect to='https://example.com/1234' />
         }
     }
 
