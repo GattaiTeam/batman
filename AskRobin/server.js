@@ -15,10 +15,6 @@ const posts = [
     Nombre: 'Rodolfo',
     ApellidoPaterno: 'Ram',
     ApellidoMaterno: 'Val'
-  },
-  {
-    username: 'Jim',
-    title: 'Post 2'
   }
 ]
 
@@ -81,4 +77,4 @@ app.get('/superman', (req,res) => {
   //  res.sendFile('/home/rodolfoarv/Documents/Gattai/AskRobin/batman/public/index.html');
 //});
 
-app.listen(5001)
+app.listen(4001)
