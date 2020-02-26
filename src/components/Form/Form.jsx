@@ -15,6 +15,7 @@ import {
 class Form extends React.Component {
     state = {
         ...this.props.initialState,
+        currentStep: 1,
     };
 
     dateToShow = new Date();
@@ -70,7 +71,7 @@ class Form extends React.Component {
     renderFields = fields => {
         return fields.map(field => {
         const isCheckbox = field.type === 'checkbox';
-            return (
+            return (this.state.currentStep === field.step) && (
                 <Field key={`field-${field.key}`}>
                     {   !isCheckbox &&
                         <Label>{field.label}</Label>
@@ -126,7 +127,11 @@ class Form extends React.Component {
     }
     
     save = () => {
-        this.props.onSave && this.props.onSave(this.state);
+        if (this.state.currentStep < 3) {
+            this.setState({...this.state, currentStep: this.state.currentStep + 1})
+        } else {
+            this.props.onSave && this.props.onSave(this.state);
+        }
     }
 
     render() {
@@ -149,7 +154,7 @@ class Form extends React.Component {
                                 </Field>                                 
                                 </Columns.Column>
                                 <Columns.Column size='half'>
-                                    <Button className='solid' onClick={this.save}>Save</Button>
+                                    <Button className='solid' onClick={this.save}>{(this.state.currentStep < 3) ? 'Guardar' : 'Continuar'}</Button>
                                 </Columns.Column> 
                                 <Columns.Column style={{textAlign: 'center'}}>
                                     {this.props.after}
