@@ -18,10 +18,11 @@ class Form extends React.Component {
     state = {
         ...this.props.initialState,
         currentStep: 1,
+        totalSteps: 7,
     };
 
     dateToShow = new Date();
-Label
+    // Label
 
     isLoading = false;
 
@@ -153,7 +154,7 @@ Label
     }
 
     save = () => {
-        if (this.state.currentStep < 3) {
+        if (this.state.currentStep < this.state.totalSteps) {
             this.setState({...this.state, currentStep: this.state.currentStep + 1})
         } else {
             this.props.onSave && this.props.onSave(this.state);
@@ -180,7 +181,7 @@ Label
                                 </Field>
                                 </Columns.Column>
                                 <Columns.Column size='half'>
-                                    <Button className='solid' onClick={this.save}>{(this.state.currentStep < 3) ? 'Guardar' : 'Continuar'}</Button>
+                                    <Button className='solid' onClick={this.save}>{(this.state.currentStep < this.state.totalSteps) ? 'Continuar' : 'Enviar'}</Button>
                                 </Columns.Column>
                                 <Columns.Column style={{textAlign: 'center'}}>
                                     {this.props.after}
