@@ -38,7 +38,8 @@ import {
       const onReceiveMessage = (event) => {
           //console.log("onReceiveMessage")
           //https://stackoverflow.com/questions/25098021/securityerror-blocked-a-frame-with-origin-from-accessing-a-cross-origin-frame
-          console.log(event)
+          if (event.origin != 'http://localhost:4000') return
+          console.log(event.data['0'])
 
       };
 
@@ -58,7 +59,6 @@ import {
   };
 
 class Form extends React.Component {
-
 
 
 
@@ -140,6 +140,8 @@ class Form extends React.Component {
           [evt.target.name]: value,
         });
     };
+
+
 
     validate = () => {
         const keys = Object.entries(this.props.initialState).map(e => e[0]);

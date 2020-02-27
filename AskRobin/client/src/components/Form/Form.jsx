@@ -21,7 +21,7 @@ class Form extends React.Component {
     };
 
     dateToShow = new Date();
-
+Label
 
     isLoading = false;
 
@@ -96,18 +96,20 @@ class Form extends React.Component {
     componentDidMount = () =>  {
       if (window.localStorage['GattaiToken']){
         const gattaiToken = window.localStorage['GattaiToken']
-        console.log(window.localStorage['GattaiToken'])
-        window.postMessage(window.localStorage['GattaiToken'])
+        //console.log(window.localStorage['GattaiToken'])
         //window.parent
 
         const authStr = 'Bearer '.concat(gattaiToken);
         axios.get('/info', { headers: { authorization: authStr } }).then(response => {
         // If request is good...
-        console.log(response.data);
+        //console.log(response.data);
+        window.top.postMessage(response.data, '*')
         })
         .catch((error) => {
         console.log('error 3 ' + error);
         });
+
+
 
 
 
