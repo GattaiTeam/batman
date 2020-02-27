@@ -4,6 +4,7 @@ import Columns from 'react-bulma-components/lib/components/columns';
 import Button from 'react-bulma-components/lib/components/button';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import IframeComm from "react-iframe-comm";
+import logo from "../../media/logo.png";
 //import GattaiFrame from '../Iframe/Iframe';
 
 
@@ -190,8 +191,8 @@ class Form extends React.Component {
                     <Columns>
                         <Columns.Column size='half' offset='one-quarter'>
                             <Columns>
-                                <Columns.Column style={{textAlign: 'center'}}>
-                                    <b> Creditea </b>
+                                <Columns.Column>
+                                    <img src={logo} className="logo" alt="Creditea" />
                                 </Columns.Column>
 
                                 <Columns.Column style={{textAlign: 'center'}}>
