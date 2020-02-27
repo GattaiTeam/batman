@@ -31,7 +31,7 @@ const Questionnaire = () => {
         },
         {
           label: "Nombre (s)",
-          key: 'first_name',
+          key: 'name',
           step: 2,
         },
         {
@@ -97,7 +97,7 @@ const Questionnaire = () => {
         amount: '',
         cellphone: '',
         email: '',
-        first_name: '',
+        name: '',
         last_name_1: '',
         last_name_2: '',
         birth_date: '',
@@ -117,8 +117,9 @@ const Questionnaire = () => {
       ).then(res => {
         localStorage.setItem('GattaiToken', res.data['accessToken']);
         console.log(res.data)
+        setRedirect(true);
       })
-      setRedirect(true);
+
     }
 
     const renderRedirect = () => {

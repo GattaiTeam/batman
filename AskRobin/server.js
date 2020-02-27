@@ -46,7 +46,10 @@ app.post('/createToken', (req, res) => {
 
 
 app.get('/info', authenticateToken, (req, res) => {
-  res.json(posts.filter(post => post.username === req.user.name))
+  console.log('here goes')
+  console.log(req.user.username)
+  console.log(posts)
+  res.json(posts.filter(post => post.name === req.user.name))
 })
 
 function authenticateToken(req, res, next) {

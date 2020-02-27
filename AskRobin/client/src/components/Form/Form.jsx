@@ -2,6 +2,8 @@ import React from 'react';
 import Container from 'react-bulma-components/lib/components/container';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Button from 'react-bulma-components/lib/components/button';
+import axios from 'axios';
+
 import {
     Field,
     Control,
@@ -95,7 +97,18 @@ class Form extends React.Component {
       if (window.localStorage['GattaiToken']){
         const gattaiToken = window.localStorage['GattaiToken']
         console.log(window.localStorage['GattaiToken'])
-        window.postMessage(window.localStorage['GattaiToken'], window.parent)
+        window.postMessage(window.localStorage['GattaiToken'])
+        //window.parent
+
+        const authStr = 'Bearer '.concat(gattaiToken);
+        axios.get('/info', { headers: { authorization: authStr } }).then(response => {
+        // If request is good...
+        console.log(response.data);
+        })
+        .catch((error) => {
+        console.log('error 3 ' + error);
+        });
+
 
 
 
