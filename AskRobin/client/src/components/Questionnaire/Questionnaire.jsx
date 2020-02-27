@@ -5,6 +5,7 @@ import jwt from 'jwt-simple';
 import { Redirect } from 'react-router-dom';
 import {secret} from '../../utils';
 import axios from 'axios';
+import logo from '../../media/logo.png';
 
 
 
@@ -131,6 +132,7 @@ const Questionnaire = () => {
     return (
         <React.Fragment>
             {renderRedirect()}
+            <img className="logo" src={logo} alt="Gattai" />
             <Form
                 onSave={handleSave}
                 initialState={initialState}
