@@ -2,11 +2,8 @@ import React from 'react';
 import Container from 'react-bulma-components/lib/components/container';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Button from 'react-bulma-components/lib/components/button';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import IframeComm from "react-iframe-comm";
 import logo from "../../media/logo.png";
-import AutoComplete from 'react-autocomplete'
-
 
 import {
     Field,
@@ -38,7 +35,7 @@ import {
       const onReceiveMessage = (event) => {
           //console.log("onReceiveMessage")
           //https://stackoverflow.com/questions/25098021/securityerror-blocked-a-frame-with-origin-from-accessing-a-cross-origin-frame
-          if (event.origin != 'http://localhost:4000') return
+          if (event.origin !== 'http://localhost:4000') return
           const userData = event.data['0']
           console.log(userData)
 
@@ -60,10 +57,6 @@ import {
   };
 
 class Form extends React.Component {
-
-
-
-
 
     state = {
         ...this.props.initialState,
@@ -109,6 +102,14 @@ class Form extends React.Component {
                 >
                     {field.label}
                 </Checkbox>);
+            case 'password': 
+            return (<Input
+                {...field}
+                name={field.key}
+                type="password"
+                onChange={this.onChange}
+                value={this.state[field.key]}
+            />)
             default:
                 return (<Input
                         {...field}

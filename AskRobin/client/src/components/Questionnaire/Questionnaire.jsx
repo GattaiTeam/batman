@@ -15,7 +15,7 @@ const Questionnaire = () => {
         },
         {
           label: "¿Cuál es tu número de celular? 📱",
-          key: 'cellphone',
+          key: 'mobile_phone',
           type: 'tel',
           step: 2,
         },
@@ -31,12 +31,12 @@ const Questionnaire = () => {
         },
         {
           label: "Primer Apellido",
-          key: 'last_name_1',
+          key: 'fathers_last_name',
           step: 3,
         },
         {
           label: "Segundo Apellido",
-          key: 'last_name_2',
+          key: 'mothers_last_name',
           step: 3,
         },
         {
@@ -84,7 +84,7 @@ const Questionnaire = () => {
         },
         {
           label: "¿Cuál es tu situación laboral? 💼",
-          key: 'employment',
+          key: 'work_status',
           step: 6,
           type: 'select',
           options: {
@@ -169,18 +169,14 @@ const Questionnaire = () => {
     ];
     const initialState = {
         amount: '',
-        cellphone: '',
+        mobile_phone: '',
         email: '',
         name: '',
-        last_name_1: '',
-        last_name_2: '',
         birth_date: '',
         sex: '',
         bank_account: '',
         monthly_income: 0,
         monthly_expenses: 0,
-        address_1: '',
-        address_2: '',
         zipcode: '',
     }
 
