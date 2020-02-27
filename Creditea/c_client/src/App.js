@@ -24,7 +24,7 @@ function App() {
     },
     {
       label: "Nombre (s)",
-      key: 'first_name',
+      key: 'name',
     },
     {
       label: "Apellido Paterno",
@@ -106,7 +106,7 @@ const initialState = {
     amount: '',
     phone: '',
     email: '',
-    first_name: '',
+    name: '',
     last_name_1: '',
     last_name_2: '',
     birth_date: '',

@@ -1,8 +1,12 @@
+
+
+
+
 let gattai = function() {
-    console.log("BLA");
     // TODO: Create a subscrition to the postMessage event
+
     let fillingDataListener = function(data) {
-        
+
         for(const key of getFieldsToFill(data)) {
             console.log("Filling data for key: " + key);
             fillData(key, data[key])
@@ -23,11 +27,21 @@ let gattai = function() {
         // Hardcoded mapping
         var mapping = {
             "amount" : "amount",
-            "phone" : "phone",
+            "cellphone" : "phone",
             "email" : "email",
-            "firstName" : "first_name",
-            "lastName" : "last_name_1",
-            "mothersLastName" : "last_name_2"    
+            "name" : "name",
+            "last_name_1" : "last_name_1",
+            "last_name_2" : "last_name_2",
+            "birth_date" :"birth_date",
+            "sex" :"sex",
+            "bank_account" :"bank_account",
+            "monthly_income" :"monthly_income",
+            "monthly_expenses": "monthly_expenses",
+            "address_1": "street",
+            "address_2": "city",
+            "zipcode": "postal_code",
+
+
         };
 
         let correspondingFieldName = mapping[fieldName];
@@ -39,11 +53,19 @@ let gattai = function() {
         "amount" : '6000',
         "phone" : '55555555555',
         "email" : 'a@a.com',
-        "firstName" : 'Rodolfo',
+        "name" : 'Rodolfo',
         "lastName" : 'Ram',
         "mothersLastName" : 'Val'
     };
 
-    fillingDataListener(sampleMessage);
+    let receiveMessage = (event) =>
+    {
+      if(event.origin !== "http://localhost:4000") return
+      let result = event.data['0'];
+      fillingDataListener(result)
+      console.log(result)
+    }
+
+    window.addEventListener("message", receiveMessage, false);
 
 }();

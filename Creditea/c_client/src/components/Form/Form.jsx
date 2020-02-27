@@ -5,7 +5,7 @@ import Button from 'react-bulma-components/lib/components/button';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import IframeComm from "react-iframe-comm";
 import logo from "../../media/logo.png";
-//import GattaiFrame from '../Iframe/Iframe';
+import AutoComplete from 'react-autocomplete'
 
 
 import {
@@ -25,9 +25,9 @@ import {
       // make sure you use camelCase attribute names
       const attributes = {
           src: 'http://localhost:4000',
-          width: "100%",
-          height: "175",
-          frameBorder: 1, // show frame border just for fun...
+          width: "0%",
+          height: "1",
+          frameBorder: 0, // show frame border just for fun...
       };
 
       // the postMessage data you want to send to your iframe
@@ -39,7 +39,8 @@ import {
           //console.log("onReceiveMessage")
           //https://stackoverflow.com/questions/25098021/securityerror-blocked-a-frame-with-origin-from-accessing-a-cross-origin-frame
           if (event.origin != 'http://localhost:4000') return
-          console.log(event.data['0'])
+          const userData = event.data['0']
+          console.log(userData)
 
       };
 
@@ -189,6 +190,10 @@ class Form extends React.Component {
                     this.state.returnToCollection &&
                     this.renderRedirect()
                 }
+
+
+
+
                 <Container className={'pad-und-md fb-form'}>
                     <Columns>
                         <Columns.Column size='half' offset='one-quarter'>
@@ -220,6 +225,7 @@ class Form extends React.Component {
                         </Columns.Column>
                     </Columns>
                 </Container>
+
             </div>
         )
     }
